@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Comercial São José | Vendas</title>
+    <title>Comercial São José | Lista de Estoque para Impressão</title>
     <link rel="stylesheet" href="../styles/common.css" />
-    <link rel="stylesheet" href="../styles/vendas.css" />
+    <link rel="stylesheet" href="../styles/imprimir-estoque.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  </head>
-  <body>
+    <style>
+        @media print {
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
     <div class="sidebar">
       <h2><a href="./index.html">São José</a></h2>
       <div class="user-info">
@@ -17,26 +22,45 @@
       </div>
       <ul>
         <li><a href="cadastro-produtos.html"><i class="fas fa-box"></i> Cadastro de Produtos</a></li>
-        <li class="active"><a href="vendas.html"><i class="fas fa-chart-line"></i> Vendas</a></li>
+        <li><a href="vendas.html"><i class="fas fa-chart-line"></i> Vendas</a></li>
         <li><a href="realizar-vendas.html"><i class="fas fa-cash-register"></i> Realizar Vendas</a></li>
         <li><a href="entrada-saida.html"><i class="fas fa-exchange-alt"></i> Entrada e Saída</a></li>
         <li><a href="controle-estoque.html"><i class="fas fa-warehouse"></i> Controle de Estoque</a></li>
         <li><a href="contagem-estoque.html"><i class="fas fa-clipboard-list"></i> Contagem Manual</a></li>
-        <li><a href="imprimir-estoque.html"><i class="fas fa-print"></i> Imprimir Estoque</a></li>
+        <li class="active"><a href="imprimir-estoque.html"><i class="fas fa-print"></i> Imprimir Estoque</a></li>
       </ul>
     </div>
 
     <main class="main-content">
-      <h1>Relatório de Vendas</h1>
-      <div class="sales-report">
-        <!-- Aqui você pode adicionar um gráfico ou tabela de vendas -->
-        <p>Conteúdo do relatório de vendas virá aqui.</p>
-      </div>
+        <h1>Lista de Estoque para Contagem Manual</h1>
+        <table>
+            <tr>
+                <th>Nome do Produto</th>
+                <th>Quantidade no Sistema</th>
+                <th>Quantidade Contada</th>
+            </tr>
+            <tr>
+                <td>Produto A</td>
+                <td>100</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Produto B</td>
+                <td>50</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Produto C</td>
+                <td>75</td>
+                <td></td>
+            </tr>
+        </table>
+        <button class="no-print" onclick="window.print()">Imprimir</button>
     </main>
 
     <footer>Direitos Reservados a TY-BYTE em nome de Raphael Câmara</footer>
 
     <script src="../js/common.js"></script>
-    <script src="../js/vendas.js"></script>
-  </body>
+    <script src="../js/imprimir-estoque.js"></script>
+</body>
 </html>
