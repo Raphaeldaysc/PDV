@@ -6,7 +6,10 @@
     <title>Comercial São José | Entrada e Saída</title>
     <link rel="stylesheet" href="../styles/common.css" />
     <link rel="stylesheet" href="../styles/entrada-saida.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
   </head>
   <body>
     <div class="sidebar">
@@ -15,45 +18,152 @@
         <img src="../assets/user-avatar.png" alt="Avatar do usuário" class="user-avatar">
         <span class="user-name">Nome do Usuário</span>
       </div>
-      <ul>
-        <li><a href="cadastro-produtos.html"><i class="fas fa-box"></i> Cadastro de Produtos</a></li>
-        <li><a href="vendas.html"><i class="fas fa-chart-line"></i> Vendas</a></li>
-        <li><a href="realizar-vendas.html"><i class="fas fa-cash-register"></i> Realizar Vendas</a></li>
-        <li class="active"><a href="entrada-saida.html"><i class="fas fa-exchange-alt"></i> Entrada e Saída</a></li>
-        <li><a href="controle-estoque.html"><i class="fas fa-warehouse"></i> Controle de Estoque</a></li>
-        <li><a href="contagem-estoque.html"><i class="fas fa-clipboard-list"></i> Contagem Manual</a></li>
-        <li><a href="imprimir-estoque.html"><i class="fas fa-print"></i> Imprimir Estoque</a></li>
-      </ul>
+      <nav>
+        <ul>
+          <li><a href="index.html"><i class="fas fa-home"></i> Painel de Controle</a></li>
+          <li><a href="cadastro-produtos.html"><i class="fas fa-box"></i> Cadastro de Produtos</a></li>
+          <li><a href="vendas.html"><i class="fas fa-chart-line"></i> Vendas</a></li>
+          <li><a href="realizar-vendas.html"><i class="fas fa-cash-register"></i> Realizar Vendas</a></li>
+          <li class="active"><a href="entrada-saida.html"><i class="fas fa-exchange-alt"></i> Entrada e Saída</a></li>
+          <li><a href="controle-estoque.html"><i class="fas fa-warehouse"></i> Controle de Estoque</a></li>
+          <li><a href="estoque.html"><i class="fas fa-clipboard-list"></i> Estoque</a></li>
+        </ul>
+      </nav>
     </div>
 
     <main class="main-content">
-      <h1>Entrada e Saída de Produtos</h1>
-      <form class="movement-form">
-        <div class="form-group">
-          <label for="product">Produto:</label>
-          <select id="product" name="product" required>
-            <option value="">Selecione um produto</option>
-            <!-- Opções de produtos serão adicionadas dinamicamente -->
-          </select>
+      <header>
+        <h1>Entrada e Saída</h1>
+        <div class="user-actions">
+          <button class="btn-icon" title="Notificações"><i class="fas fa-bell"></i></button>
+          <button class="btn-icon" title="Configurações"><i class="fas fa-cog"></i></button>
+          <button class="btn-icon" title="Sair"><i class="fas fa-sign-out-alt"></i></button>
         </div>
-        <div class="form-group">
-          <label for="quantity">Quantidade:</label>
-          <input type="number" id="quantity" name="quantity" required>
+      </header>
+
+      <section class="dashboard-summary">
+        <div class="summary-card">
+          <h3>Saldo Atual</h3>
+          <p class="summary-value" id="currentBalance">R$ 0,00</p>
+          <p class="summary-period">Atualizado em tempo real</p>
         </div>
-        <div class="form-group">
-          <label for="movement-type">Tipo de Movimento:</label>
-          <select id="movement-type" name="movement-type" required>
-            <option value="entrada">Entrada</option>
-            <option value="saida">Saída</option>
-          </select>
+        <div class="summary-card">
+          <h3>Total de Saídas</h3>
+          <p class="summary-value" id="totalOutflow">R$ 0,00</p>
+          <p class="summary-period">Últimos 30 dias</p>
         </div>
-        <button type="submit" class="btn-submit">Registrar Movimento</button>
-      </form>
+        <div class="summary-card">
+          <h3>Total de Entradas</h3>
+          <p class="summary-value" id="totalInflow">R$ 0,00</p>
+          <p class="summary-period">Últimos 30 dias</p>
+        </div>
+      </section>
+
+      <section class="movement-form-container">
+        <h2>Registrar Movimentação</h2>
+        <form id="movementForm" class="movement-form">
+          <div class="form-group">
+            <label for="movement-type">Tipo:</label>
+            <div class="input-group">
+              <i class="fas fa-exchange-alt"></i>
+              <select id="movement-type" name="movement-type" required>
+                <option value="entrada">Entrada</option>
+                <option value="saida">Saída</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="movement-amount">Valor:</label>
+            <div class="input-group">
+              <i class="fas fa-dollar-sign"></i>
+              <input type="number" id="movement-amount" name="movement-amount" step="0.01" required min="0.01">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="movement-reason">Motivo:</label>
+            <div class="input-group">
+              <i class="fas fa-comment"></i>
+              <input type="text" id="movement-reason" name="movement-reason" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="movement-person">Responsável:</label>
+            <div class="input-group">
+              <i class="fas fa-user"></i>
+              <input type="text" id="movement-person" name="movement-person" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-submit">
+            <i class="fas fa-save"></i> Registrar Movimentação
+          </button>
+        </form>
+      </section>
+
+      <section class="movement-history">
+        <h2>Histórico de Movimentações</h2>
+        <div class="table-actions">
+          <button id="imprimir-saidas" class="btn btn-secondary">
+            <i class="fas fa-print"></i> Imprimir Relatório
+          </button>
+          <div class="input-group search-group">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchMovements" placeholder="Buscar movimentações...">
+          </div>
+        </div>
+        <table id="movementTable">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Tipo</th>
+              <th>Valor</th>
+              <th>Motivo</th>
+              <th>Responsável</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Movimentações serão adicionadas aqui dinamicamente -->
+          </tbody>
+        </table>
+        <div class="pagination">
+          <button id="prevPage" class="btn btn-outline">
+            <i class="fas fa-chevron-left"></i> Anterior
+          </button>
+          <span id="currentPage">1</span>
+          <button id="nextPage" class="btn btn-outline">
+            Próximo <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </section>
+
+      <!-- Adicione esta nova seção para o relatório de saídas -->
+      <div id="relatorio-saidas" style="display: none;">
+        <h2>Relatório de Saídas</h2>
+        <p>Data de Impressão: <span id="dataImpressao"></span></p>
+        <p>Total de Saídas: R$ <span id="totalSaidas"></span></p>
+        <p>Responsável com Mais Saídas: <span id="responsavelMaisSaidas"></span></p>
+        <table id="tabelaSaidas">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Valor</th>
+              <th>Motivo</th>
+              <th>Responsável</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- As saídas serão inseridas aqui dinamicamente -->
+          </tbody>
+        </table>
+      </div>
     </main>
 
-    <footer>Direitos Reservados a TY-BYTE em nome de Raphael Câmara</footer>
+    <footer>
+      <p>&copy; 2024 Comercial São José. Todos os direitos reservados.</p>
+      <p>Desenvolvido por FGenius</p>
+    </footer>
 
-    <script src="../js/common.js"></script>
-    <script src="../js/entrada-saida.js"></script>
+    <script type="module" src="../js/common.js"></script>
+    <script type="module" src="../js/dataManager.js"></script>
+    <script type="module" src="../js/entrada-saida.js"></script>
   </body>
 </html>

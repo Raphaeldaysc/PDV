@@ -1,31 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Comercial São Jose | Login</title>
+    <title>Comercial São José | Login</title>
+    <link rel="stylesheet" href="../styles/common.css" />
     <link rel="stylesheet" href="../styles/login.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
   </head>
   <body>
-    <main>
-      <section class="image___div">
-        <img src="../assets/sao-jose-lateral_jpg.png" alt="São Jose" />
-      </section>
-      <section class="section__right">
-        <h1>Comercial São José</h1>
-        <form action="/" method="post">
-          <label for="username" aria-placeholder="Seu nome">Seu Nome:</label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            placeholder="Ex: Flavio"
-          /><br /><br />
-          <label for="password">Sua Senha:</label>
-          <input type="password" name="password" id="password" />
-        </form>
-      </section>
-      <footer>Direitos Reservados a TY-BYTE em nome de Raphael Câmara</footer>
-    </main>
+    <div class="login-page">
+      <div class="login-content">
+        <div class="login-image">
+          <img src="../assets/sao-jose-lateral_jpg.png" alt="Comercial São José" />
+        </div>
+        <main class="login-form-container">
+          <div class="login-header">
+            <h1>Comercial São José</h1>
+            <p>Faça login para acessar o sistema</p>
+          </div>
+          <form id="loginForm" class="login-form">
+            <div class="form-group">
+              <label for="username">Usuário</label>
+              <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  placeholder="Digite seu nome de usuário"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password">Senha</label>
+              <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Digite sua senha"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-submit">
+                <i class="fas fa-sign-in-alt"></i> Entrar
+              </button>
+            </div>
+            <div class="form-group forgot-password">
+              <a href="#">Esqueceu sua senha?</a>
+            </div>
+          </form>
+          <div class="login-footer">
+            <p>&copy; 2024 Comercial São José. Todos os direitos reservados.</p>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/login.js"></script>
   </body>
 </html>

@@ -6,3 +6,100 @@
 }
 
 /* Adicione estilos específicos para o gráfico ou tabela de vendas aqui */
+
+.sales-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.summary-card {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  box-shadow: var(--box-shadow);
+}
+
+.summary-card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+
+.summary-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 5px;
+}
+
+.summary-period {
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+.sales-chart,
+.top-products,
+.recent-sales {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  box-shadow: var(--box-shadow);
+  margin-bottom: 30px;
+}
+
+.sales-chart h2,
+.top-products h2,
+.recent-sales h2 {
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 24px;
+  color: var(--text-color);
+}
+
+.chart-controls {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+#chartPeriod {
+  padding: 10px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--text-light);
+  font-size: 16px;
+  color: var(--text-color);
+}
+
+#salesChart {
+  max-height: 300px;
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--background-color);
+}
+
+th {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 500;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+@media (max-width: 768px) {
+  .sales-summary {
+    grid-template-columns: 1fr;
+  }
+}
