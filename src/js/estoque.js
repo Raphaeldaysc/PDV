@@ -1,3 +1,5 @@
+import DataManager from './dataManager.js';
+
 document.addEventListener('DOMContentLoaded', function() {
     inicializarPagina();
 });
@@ -17,14 +19,9 @@ function configurarEventos() {
 }
 
 function carregarProdutos() {
-    // Simular carregamento de produtos do backend
-    const produtos = [
-        { codigo: '001', nome: 'Martelo', categoria: 'Ferramentas', quantidade: 50, preco: 29.90 },
-        { codigo: '002', nome: 'Chave de Fenda', categoria: 'Ferramentas', quantidade: 100, preco: 15.50 },
-        { codigo: '003', nome: 'Fio 2.5mm', categoria: 'Elétrica', quantidade: 200, preco: 2.75 },
-        // Adicione mais produtos conforme necessário
-    ];
+    const produtos = DataManager.getProducts();
     preencherTabelaProdutos(produtos);
+    preencherFiltroCategoria(produtos);
 }
 
 function preencherTabelaProdutos(produtos) {
@@ -33,16 +30,28 @@ function preencherTabelaProdutos(produtos) {
     produtos.forEach(produto => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td>${produto.codigo}</td>
-            <td>${produto.nome}</td>
-            <td>${produto.categoria}</td>
-            <td>${produto.quantidade}</td>
-            <td>R$ ${produto.preco.toFixed(2)}</td>
-            <td>R$ ${(produto.quantidade * produto.preco).toFixed(2)}</td>
-            <td><input type="number" class="contagem-manual" data-codigo="${produto.codigo}"></td>
+            <td>${produto['product-code']}</td>
+            <td>${produto['product-name']}</td>
+            <td>${produto['product-category']}</td>
+            <td>${produto['product-quantity']}</td>
+            <td>R$ ${parseFloat(produto['product-price']).toFixed(2)}</td>
+            <td>R$ ${(produto['product-quantity'] * produto['product-price']).toFixed(2)}</td>
+            <td><input type="number" class="contagem-manual" data-codigo="${produto['product-code']}"></td>
             <td class="diferenca"></td>
         `;
         tbody.appendChild(tr);
+    });
+}
+
+function preencherFiltroCategoria(produtos) {
+    const categorias = [...new Set(produtos.map(p => p['product-category']))];
+    const filtroCategoria = document.getElementById('filtro-categoria');
+    filtroCategoria.innerHTML = '<option value="">Todas as categorias</option>';
+    categorias.forEach(categoria => {
+        const option = document.createElement('option');
+        option.value = categoria;
+        option.textContent = categoria;
+        filtroCategoria.appendChild(option);
     });
 }
 
@@ -52,9 +61,16 @@ function imprimirContagem() {
 
 function lancarContagem() {
     const contagemManual = obterContagemManual();
-    // Implementar lógica para lançar contagem no sistema
+    const produtos = DataManager.getProducts();
+    produtos.forEach(produto => {
+        if (contagemManual[produto['product-code']]) {
+            produto['product-quantity'] = contagemManual[produto['product-code']];
+        }
+    });
+    DataManager.setProducts(produtos);
     alert('Contagem lançada no sistema');
-    // Aqui você pode adicionar a lógica para enviar os dados para o backend
+    carregarProdutos();
+    atualizarResumo();
 }
 
 function obterContagemManual() {
@@ -87,8 +103,14 @@ function filtrarProdutos() {
 }
 
 function atualizarResumo() {
-    // Implementar lógica para atualizar os valores do resumo
-    document.getElementById('totalProdutos').textContent = '350';
-    document.getElementById('valorTotalEstoque').textContent = 'R$ 12.345,67';
-    document.getElementById('produtosEstoqueBaixo').textContent = '5';
+    const produtos = DataManager.getProducts();
+    const totalProdutos = produtos.length;
+    const valorTotalEstoque = produtos.reduce((total, produto) => 
+        total + (produto['product-quantity'] * produto['product-price']), 0);
+    const produtosEstoqueBaixo = produtos.filter(produto => 
+        produto['product-quantity'] < produto['product-min-stock']).length;
+
+    document.getElementById('totalProdutos').textContent = totalProdutos;
+    document.getElementById('valorTotalEstoque').textContent = `R$ ${valorTotalEstoque.toFixed(2)}`;
+    document.getElementById('produtosEstoqueBaixo').textContent = produtosEstoqueBaixo;
 }
