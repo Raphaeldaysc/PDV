@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comercial São José | Login</title>
+    <link rel="stylesheet" href="{% static '/css/common.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/login.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="login-page">
+      <div class="login-content">
+        <div class="login-image">
+          <img src="{% static '/assets/sao-jose-lateral_jpg.png' %}" alt="Comercial São José" />
+        </div>
+        <main class="login-form-container">
+          <div class="login-header">
+            <h1>Comercial São José</h1>
+            <p>Faça login para acessar o sistema</p>
+          </div>
+          {% if messages %}
+          {% for i in messages %}
+          <div class="alert {{i.tags}}" role="alert">
+              {{i}}
+          </div>
+          {% endfor %}
+          {% endif %}
+        {% if status == '1' %}
+           <div class="alert alert-danger" role="alert">
+              Usuario não Encontrado.
+          </div>
+        {% endif %}
+        {% if status == '2' %}
+           <div class="alert alert-danger" role="alert">
+              Você não está Logado.
+          </div>
+        {% endif %}
+          <form id="loginForm" class="login-form" method='POST' action='{% url "valida_login" %}'> 
+              {% csrf_token %}
+            <div class="form-group">
+              <label for="username">Usuário</label>
+              <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  placeholder="Digite seu nome de usuário"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password">Senha</label>
+              <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Digite sua senha"
+                  required
+                />
+              </div>
+            </div>
+            
+            <!-- Agrupando os botões em uma única div para alinhamento -->
+            <div class="form-group button-group">
+              <button type="submit" class="btn btn-primary btn-submit">
+                <i class="fas fa-sign-in-alt"></i> Entrar
+              </button>
+            <br /><br />
+              <a href="{% url 'cadastro' %}" class="btn btn-secondary btn-submit">
+                <i class="fas fa-user-plus"></i> Cadastrar
+              </a>
+            </div>
+            
+            <div class="form-group forgot-password">
+              <a href="#">Esqueceu sua senha?</a>
+            </div>
+          </form>
+
+          <div class="login-footer">
+            <p>&copy; {% now 'Y' %} Comercial São José. Todos os direitos reservados.</p>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="{% static "js/common.js" %}"></script>
+    <script src="{% static "js/login.js" %}"></script>
+  </body>
+</html>

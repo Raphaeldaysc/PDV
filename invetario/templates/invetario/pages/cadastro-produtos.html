@@ -1,0 +1,148 @@
+{% extends "global/base.html" %}
+{% load static %}
+{% block area_title %}Cadastro de Produto{% endblock area_title %}</title>
+{% block estilo_unico %}{% static "/css/cadastro-produtos.css" %}{% endblock estilo_unico %}
+{% block content %}
+<main class="main-content">
+
+      <header>
+        <h1>Cadastro de Produtos</h1>
+        <div class="user-actions">
+          <button class="btn-icon" title="Notificações"><i class="fas fa-bell"></i></button>
+          <button class="btn-icon" title="Configurações"><i class="fas fa-cog"></i></button>
+          <button class="btn-icon" title="Sair"><i class="fas fa-sign-out-alt"></i></button>
+        </div>
+      </header>
+
+      <div class="content-wrapper">
+        <section class="product-form-container">
+          <h2>Novo Produto</h2>
+          <form id="productForm" class="product-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="product-name">Nome do Produto:</label>
+                <div class="input-group">
+                  <i class="fas fa-box"></i>
+                  <input type="text" id="product-name" name="product-name" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="product-category">Categoria:</label>
+                <div class="input-group">
+                  <i class="fas fa-tags"></i>
+                  <select id="product-category" name="product-category" required>
+                    <option value="">Selecione uma categoria</option>
+                    <option value="FER">Ferramentas</option>
+                    <option value="ELE">Elétrica</option>
+                    <option value="HID">Hidráulica</option>
+                    <option value="PIN">Pintura</option>
+                    <option value="MAD">Madeira</option>
+                    <option value="CIM">Cimento e Argamassa</option>
+                    <option value="PIS">Pisos e Revestimentos</option>
+                    <option value="ILU">Iluminação</option>
+                    <option value="JAR">Jardinagem</option>
+                    <option value="EPI">Equipamentos de Proteção</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="product-price">Preço por Unidade/Metro:</label>
+                <div class="input-group">
+                  <i class="fas fa-dollar-sign"></i>
+                  <input type="number" id="product-price" name="product-price" step="0.01" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="product-cost">Custo por Unidade/Metro:</label>
+                <div class="input-group">
+                  <i class="fas fa-dollar-sign"></i>
+                  <input type="number" id="product-cost" name="product-cost" step="0.01" required>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="product-quantity">Quantidade Total:</label>
+                <div class="input-group">
+                  <i class="fas fa-cubes"></i>
+                  <input type="number" id="product-quantity" name="product-quantity" step="0.01" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="product-unit">Unidade de Medida:</label>
+                <div class="input-group">
+                  <i class="fas fa-ruler"></i>
+                  <select id="product-unit" name="product-unit" required>
+                    <option value="unidade">Unidade</option>
+                    <option value="metro">Metro</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="product-min-stock">Estoque Mínimo:</label>
+                <div class="input-group">
+                  <i class="fas fa-exclamation-triangle"></i>
+                  <input type="number" id="product-min-stock" name="product-min-stock" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="product-image">Imagem do Produto:</label>
+                <input type="file" id="product-image" name="product-image" accept="image/*">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="product-description">Descrição:</label>
+              <textarea id="product-description" name="product-description" rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-submit">
+              <i class="fas fa-save"></i> Cadastrar Produto
+            </button>
+          </form>
+        </section>
+
+        <section class="product-list">
+          <h2>Produtos Cadastrados</h2>
+          <div class="product-list-controls">
+            <div class="input-group">
+              <i class="fas fa-search"></i>
+              <input type="text" id="productSearch" placeholder="Pesquisar produtos...">
+            </div>
+            <div class="input-group">
+              <i class="fas fa-filter"></i>
+              <select id="productFilter">
+                <option value="">Todas as categorias</option>
+                <!-- Opções de categorias serão adicionadas dinamicamente -->
+              </select>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table id="productTable">
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Nome</th>
+                  <th>Categoria</th>
+                  <th>Preço</th>
+                  <th>Quantidade</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Produtos serão adicionados aqui dinamicamente -->
+              </tbody>
+            </table>
+          </div>
+          <div class="pagination">
+            <button id="prevPage" class="btn btn-outline"><i class="fas fa-chevron-left"></i> Anterior</button>
+            <span id="currentPage">1</span>
+            <button id="nextPage" class="btn btn-outline">Próximo <i class="fas fa-chevron-right"></i></button>
+          </div>
+        </section>
+      </div>
+    </main>
+    <script type="module" src="{% static "js/cadastro-produtos.js" %}"></script>
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{empresa}} | {% block area_title %}{% endblock area_title %}</title>
+    <link rel="stylesheet" href="{% static "/css/common.css" %}" />
+    <link rel="stylesheet" href="{% block estilo_unico %}{% endblock estilo_unico %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    {% include "invetario/partials/menu_lateral.html" %}
+
+{% block content %}
+
+
+   
+{% endblock content %}
+  <script type="module" src="{% static "js/common.js" %}"></script>
+    <script type="module" src="{% static "js/dataManager.js" %}"></script>
+{% include "invetario/partials/footer.html" %}
+  </body>
+</html>

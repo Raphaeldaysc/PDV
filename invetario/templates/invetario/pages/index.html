@@ -1,0 +1,90 @@
+{% extends "global/base.html" %}
+{% load static %}
+{% block area_title %}Painel de Controle{% endblock area_title %}</title>
+{% block estilo_unico %}{% static "/css/index.css" %}{% endblock estilo_unico %}
+{% block content %}
+    <main class="main-content">
+      <header>
+        <h1>Painel de Controle</h1>
+        <div class="user-actions">
+          <button class="btn-icon" title="Notificações"><i class="fas fa-bell"></i></button>
+          <button class="btn-icon" title="Configurações"><i class="fas fa-cog"></i></button>
+          <a class="btn-icon" title="Sair" href='{% url "logout" %}' style='text-decoration: none'> <i class="fas fa-sign-out-alt"> </i> </a>
+        </div>
+      </header>
+
+      <section class="dashboard-summary">
+        <div class="summary-card">
+          <h3>Total de Vendas</h3>
+          <p class="summary-value" id="totalSales">R$ 0,00</p>
+          <p class="summary-period">Últimos 30 dias</p>
+          <a href="vendas.html" class="btn btn-link">Ver detalhes <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="summary-card">
+          <h3>Produtos em Estoque</h3>
+          <p class="summary-value" id="totalProducts">0</p>
+          <p class="summary-period">Atualizado hoje</p>
+          <a href="estoque.html" class="btn btn-link">Ver estoque <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="summary-card">
+          <h3>Pedidos Pendentes</h3>
+          <p class="summary-value" id="pendingOrders">0</p>
+          <p class="summary-period">Necessitam atenção</p>
+          <a href="#" class="btn btn-link">Ver pedidos <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </section>
+
+      <section class="quick-actions">
+        <h2>Ações Rápidas</h2>
+        <div class="card-container">
+          <a href="cadastro-produtos.html" class="card">
+            <div class="card-icon">
+              <i class="fas fa-box"></i>
+            </div>
+            <div class="card-content">
+              <h3>Cadastro de Produtos</h3>
+              <p>Adicione novos produtos ao estoque</p>
+            </div>
+          </a>
+          <a href="{% url "realizar_venda" %}" class="card">
+            <div class="card-icon">
+              <i class="fas fa-cash-register"></i>
+            </div>
+            <div class="card-content">
+              <h3>Realizar Vendas</h3>
+              <p>Registre novas vendas</p>
+            </div>
+          </a>
+          <a href="{% url "entrada_saida" %}" class="card">
+            <div class="card-icon">
+              <i class="fas fa-exchange-alt"></i>
+            </div>
+            <div class="card-content">
+              <h3>Entrada e Saída</h3>
+              <p>Gerencie o fluxo de caixa</p>
+            </div>
+          </a>
+          <a href="controle-estoque.html" class="card">
+            <div class="card-icon">
+              <i class="fas fa-warehouse"></i>
+            </div>
+            <div class="card-content">
+              <h3>Controle de Estoque</h3>
+              <p>Monitore e atualize o estoque</p>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section class="recent-activities">
+        <h2>Atividades Recentes</h2>
+        <ul id="recentActivitiesList">
+          <!-- Atividades recentes serão adicionadas dinamicamente aqui -->
+        </ul>
+        <a href="#" class="btn btn-link btn-view-all">Ver todas as atividades <i class="fas fa-arrow-right"></i></a>
+      </section>
+    </main>
+
+    <script type="module" src="../js/index.js"></script>
+{% endblock content %}
+

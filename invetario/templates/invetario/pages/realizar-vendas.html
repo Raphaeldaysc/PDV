@@ -1,0 +1,112 @@
+{% extends "global/base.html" %}
+{% load static %}
+{% block area_title %}Realizar Vendas{% endblock area_title %}</title>
+{% block estilo_unico %}{% static "/css/realizar-vendas.css" %}{% endblock estilo_unico %}
+{% block content %}
+    <main class="main-content">
+      <header>
+        <h1>Realizar Vendas</h1>
+        <div class="user-actions">
+          <button class="btn-icon" title="Notificações"><i class="fas fa-bell"></i></button>
+          <button class="btn-icon" title="Configurações"><i class="fas fa-cog"></i></button>
+          <button class="btn-icon" title="Sair"><i class="fas fa-sign-out-alt"></i></button>
+        </div>
+      </header>
+
+      <div class="sales-container">
+        <section class="sales-form-container">
+          <h2>Adicionar Produto</h2>
+          <form id="salesForm" class="sales-form">
+            <div class="form-group">
+              <label for="product-search">Buscar Produto:</label>
+              <div class="input-group">
+                <i class="fas fa-search"></i>
+                <input
+                  type="text"
+                  id="product-search"
+                  name="product-search"
+                  placeholder="Digite o nome ou código do produto"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="product">Produto:</label>
+              <div class="input-group">
+                <i class="fas fa-box"></i>
+                <select id="product" name="product" required>
+                  <option value="">Selecione um produto</option>
+                  <!-- Opções de produtos serão adicionadas dinamicamente -->
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="quantity">Quantidade:</label>
+                <div class="input-group">
+                  <i class="fas fa-sort-numeric-up"></i>
+                  <input type="number" id="quantity" name="quantity" required min="1" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="unit-price">Preço Unitário:</label>
+                <div class="input-group">
+                  <i class="fas fa-tag"></i>
+                  <input type="number" id="unit-price" name="unit-price" step="0.01" readonly />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="total-price">Preço Total:</label>
+              <div class="input-group">
+                <i class="fas fa-dollar-sign"></i>
+                <input type="number" id="total-price" name="total-price" step="0.01" readonly />
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-submit">
+              <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+            </button>
+          </form>
+        </section>
+
+        <section class="cart-container">
+          <h2>Carrinho de Compras</h2>
+          <div class="table-responsive">
+            <table id="cartTable">
+              <thead>
+                <tr>
+                  <th>Produto</th>
+                  <th>Quantidade</th>
+                  <th>Preço Unitário</th>
+                  <th>Total</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Itens do carrinho serão adicionados aqui dinamicamente -->
+              </tbody>
+            </table>
+          </div>
+          <div class="cart-summary">
+            <div class="cart-totals">
+              <p>Subtotal: R$ <span id="cartSubtotal">0.00</span></p>
+              <div class="discount-container">
+                <label for="discount">Desconto (%):</label>
+                <div class="input-group">
+                  <i class="fas fa-percent"></i>
+                  <input type="number" id="discount" name="discount" min="0" max="100" step="0.1" value="0" />
+                </div>
+              </div>
+              <p>Desconto: R$ <span id="discountAmount">0.00</span></p>
+              <p class="total">Total da Venda: R$ <span id="cartTotal">0.00</span></p>
+            </div>
+            <button id="finalizeSale" class="btn btn-success btn-finalize">
+              <i class="fas fa-check-circle"></i> Finalizar Venda
+            </button>
+          </div>
+        </section>
+      </div>
+    </main>
+<script type="module" src="{% static "js/realizar-vendas.js" %}"></script> 
+{% endblock content %}
+  
+

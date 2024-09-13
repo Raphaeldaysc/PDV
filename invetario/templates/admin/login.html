@@ -1,0 +1,53 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/common.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+{% endblock %}
+
+{% block content %}
+    <div class="login-page">
+        <div class="login-content">
+            <div class="login-image">
+                <img src="{% static 'assets/sao-jose-lateral_jpg.png' %}" alt="Comercial São José" />
+            </div>
+            <main class="login-form-container">
+                <div class="login-header">
+                    <h1>Comercial São José</h1>
+                    <p>Faça login para acessar o sistema</p>
+                </div>
+                <form id="loginForm" class="login-form" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username">Usuário</label>
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            {{ form.username }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            {{ form.password }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-submit">
+                            <i class="fas fa-sign-in-alt"></i> Entrar
+                        </button>
+                    </div>
+                    <div class="form-group forgot-password">
+                        <a href="{% url 'admin_password_reset' %}">Esqueceu sua senha?</a>
+                    </div>
+                </form>
+                <div class="login-footer">
+                    <p>&copy; 2024 Comercial São José. Todos os direitos reservados.</p>
+                </div>
+            </main>
+        </div>
+    </div>
+{% endblock %}

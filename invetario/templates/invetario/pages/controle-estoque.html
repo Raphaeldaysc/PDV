@@ -1,0 +1,87 @@
+{% extends "global/base.html" %}
+{% load static %}
+{% block area_title %}Controle de Estoque{% endblock area_title %}</title>
+{% block estilo_unico %}{% static "/css/controle-estoque.css" %}{% endblock estilo_unico %}
+
+{% block content %}
+    <main class="main-content">
+      <header>
+        <h1>Controle de Estoque</h1>
+        <div class="user-actions">
+          <button class="btn-icon" title="Notificações"><i class="fas fa-bell"></i></button>
+          <button class="btn-icon" title="Configurações"><i class="fas fa-cog"></i></button>
+          <button class="btn-icon" title="Sair"><i class="fas fa-sign-out-alt"></i></button>
+        </div>
+      </header>
+
+      <section class="dashboard-summary">
+        <div class="summary-card">
+          <h3>Total de Produtos</h3>
+          <p class="summary-value" id="totalProducts">0</p>
+          <p class="summary-period">Em estoque</p>
+          <a href="#" class="btn btn-link">Ver lista completa <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="summary-card">
+          <h3>Valor Total em Estoque</h3>
+          <p class="summary-value" id="totalStockValue">R$ 0,00</p>
+          <p class="summary-period">Atualizado em tempo real</p>
+        </div>
+        <div class="summary-card">
+          <h3>Produtos com Estoque Baixo</h3>
+          <p class="summary-value" id="lowStockProducts">0</p>
+          <p class="summary-period">Necessitam reposição</p>
+          <a href="#" class="btn btn-link">Ver detalhes <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </section>
+
+      <section class="stock-controls">
+        <div class="search-filter">
+          <div class="input-group">
+            <i class="fas fa-search"></i>
+            <input type="text" id="productSearch" placeholder="Buscar produto...">
+          </div>
+          <div class="input-group">
+            <i class="fas fa-filter"></i>
+            <select id="categoryFilter">
+              <option value="">Todas as categorias</option>
+              <!-- Opções de categorias serão adicionadas dinamicamente -->
+            </select>
+          </div>
+        </div>
+        <button id="addProduct" class="btn btn-primary">
+          <i class="fas fa-plus"></i> Adicionar Produto
+        </button>
+      </section>
+
+      <section class="stock-table">
+        <table id="stockTable">
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Produto</th>
+              <th>Categoria</th>
+              <th>Quantidade</th>
+              <th>Unidade</th>
+              <th>Preço</th>
+              <th>Valor Total</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Linhas da tabela serão adicionadas dinamicamente -->
+          </tbody>
+        </table>
+      </section>
+
+      <div class="pagination">
+        <button id="prevPage" class="btn btn-outline">
+          <i class="fas fa-chevron-left"></i> Anterior
+        </button>
+        <span id="currentPage">1</span>
+        <button id="nextPage" class="btn btn-outline">
+          Próximo <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </main>
+    <script type="module" src="{% static "js/controle-estoque.js" %}"></script>
+{% endblock content %}

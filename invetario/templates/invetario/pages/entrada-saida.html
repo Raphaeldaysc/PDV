@@ -1,0 +1,133 @@
+{% extends "global/base.html" %}
+{% load static %}
+{% block area_title %}Entrada-Saida{% endblock area_title %}</title>
+{% block estilo_unico %}{% static "/css/entrada-saida.css" %}{% endblock estilo_unico %}
+ 
+{% block content %}
+<main class="main-content">
+      <header>
+        <h1>Entrada e Saída</h1>
+        <div class="user-actions">
+          <button class="btn-icon" title="Notificações"><i class="fas fa-bell"></i></button>
+          <button class="btn-icon" title="Configurações"><i class="fas fa-cog"></i></button>
+          <button class="btn-icon" title="Sair"><i class="fas fa-sign-out-alt"></i></button>
+        </div>
+      </header>
+
+      <section class="dashboard-summary">
+        <div class="summary-card">
+          <h3>Saldo Atual</h3>
+          <p class="summary-value" id="currentBalance">R$ 0,00</p>
+          <p class="summary-period">Atualizado em tempo real</p>
+        </div>
+        <div class="summary-card">
+          <h3>Total de Saídas</h3>
+          <p class="summary-value" id="totalOutflow">R$ 0,00</p>
+          <p class="summary-period">Últimos 30 dias</p>
+        </div>
+        <div class="summary-card">
+          <h3>Total de Entradas</h3>
+          <p class="summary-value" id="totalInflow">R$ 0,00</p>
+          <p class="summary-period">Últimos 30 dias</p>
+        </div>
+      </section>
+
+      <section class="movement-form-container">
+        <h2>Registrar Movimentação</h2>
+        <form id="movementForm" class="movement-form">
+          <div class="form-group">
+            <label for="movement-type">Tipo:</label>
+            <div class="input-group">
+              <i class="fas fa-exchange-alt"></i>
+              <select id="movement-type" name="movement-type" required>
+                <option value="entrada">Entrada</option>
+                <option value="saida">Saída</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="movement-amount">Valor:</label>
+            <div class="input-group">
+              <i class="fas fa-dollar-sign"></i>
+              <input type="number" id="movement-amount" name="movement-amount" step="0.01" required min="0.01">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="movement-reason">Motivo:</label>
+            <div class="input-group">
+              <i class="fas fa-comment"></i>
+              <input type="text" id="movement-reason" name="movement-reason" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="movement-person">Responsável:</label>
+            <div class="input-group">
+              <i class="fas fa-user"></i>
+              <input type="text" id="movement-person" name="movement-person" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-submit">
+            <i class="fas fa-save"></i> Registrar Movimentação
+          </button>
+        </form>
+      </section>
+
+      <section class="movement-history">
+        <h2>Histórico de Movimentações</h2>
+        <div class="table-actions">
+          <button id="imprimir-saidas" class="btn btn-secondary">
+            <i class="fas fa-print"></i> Imprimir Relatório
+          </button>
+          <div class="input-group search-group">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchMovements" placeholder="Buscar movimentações...">
+          </div>
+        </div>
+        <table id="movementTable">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Tipo</th>
+              <th>Valor</th>
+              <th>Motivo</th>
+              <th>Responsável</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Movimentações serão adicionadas aqui dinamicamente -->
+          </tbody>
+        </table>
+        <div class="pagination">
+          <button id="prevPage" class="btn btn-outline">
+            <i class="fas fa-chevron-left"></i> Anterior
+          </button>
+          <span id="currentPage">1</span>
+          <button id="nextPage" class="btn btn-outline">
+            Próximo <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </section>
+
+      <!-- Adicione esta nova seção para o relatório de saídas -->
+      <div id="relatorio-saidas" style="display: none;">
+        <h2>Relatório de Saídas</h2>
+        <p>Data de Impressão: <span id="dataImpressao"></span></p>
+        <p>Total de Saídas: R$ <span id="totalSaidas"></span></p>
+        <p>Responsável com Mais Saídas: <span id="responsavelMaisSaidas"></span></p>
+        <table id="tabelaSaidas">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Valor</th>
+              <th>Motivo</th>
+              <th>Responsável</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- As saídas serão inseridas aqui dinamicamente -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+    <script type="module" src="{% static "js/entrada-saida.js" %}"></script>
+{% endblock content %}  

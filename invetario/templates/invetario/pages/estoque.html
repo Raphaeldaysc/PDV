@@ -1,0 +1,94 @@
+
+{% extends "global/base.html" %}
+{% load static %}
+{% block area_title %}Gestão de Estoque{% endblock area_title %}</title>
+{% block estilo_unico %}{% static "/css/estoque.css" %}{% endblock estilo_unico %}
+{% block content %}   
+ <main class="main-content">
+        <header>
+            <h1>Gestão de Estoque</h1>
+            <div class="user-actions">
+                <button class="btn-icon" title="Notificações"><i class="fas fa-bell"></i></button>
+                <button class="btn-icon" title="Configurações"><i class="fas fa-cog"></i></button>
+                <button class="btn-icon" title="Sair"><i class="fas fa-sign-out-alt"></i></button>
+            </div>
+        </header>
+        
+        <section class="dashboard-summary">
+            <div class="summary-card">
+                <h3>Total de Produtos</h3>
+                <p class="summary-value" id="totalProdutos">0</p>
+                <p class="summary-period">Em estoque</p>
+            </div>
+            <div class="summary-card">
+                <h3>Valor Total do Estoque</h3>
+                <p class="summary-value" id="valorTotalEstoque">R$ 0,00</p>
+                <p class="summary-period">Atualizado em tempo real</p>
+            </div>
+            <div class="summary-card">
+                <h3>Produtos com Estoque Baixo</h3>
+                <p class="summary-value" id="produtosEstoqueBaixo">0</p>
+                <p class="summary-period">Abaixo do mínimo</p>
+            </div>
+        </section>
+
+        <section class="estoque-lista">
+            <h2>Lista de Estoque</h2>
+            <div class="estoque-controls">
+                <div class="input-group">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="busca-produto" placeholder="Buscar produto...">
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-filter"></i>
+                    <select id="filtro-categoria">
+                        <option value="">Todas as categorias</option>
+                        <!-- Opções de categorias serão adicionadas dinamicamente -->
+                    </select>
+                </div>
+                <button id="imprimir-contagem" class="btn btn-primary">
+                    <i class="fas fa-print"></i> Imprimir para Contagem
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table id="tabela-estoque" class="table">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nome do Produto</th>
+                            <th>Categoria</th>
+                            <th>Quantidade no Sistema</th>
+                            <th>Preço Unitário</th>
+                            <th>Valor Total</th>
+                            <th class="contagem-column">Contagem Manual</th>
+                            <th class="diferenca-column">Diferença</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Os produtos serão adicionados dinamicamente aqui -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination">
+                <button id="prevPage" class="btn btn-outline"><i class="fas fa-chevron-left"></i> Anterior</button>
+                <span id="currentPage">1</span>
+                <button id="nextPage" class="btn btn-outline">Próximo <i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+
+        <section class="acoes-contagem">
+            <button id="lancar-contagem" class="btn btn-success">
+                <i class="fas fa-save"></i> Lançar Contagem no Sistema
+            </button>
+        </section>
+    </main>
+
+    <div class="print-only">
+        <div class="print-header">
+            <h2>Comercial São José - Contagem de Estoque</h2>
+            <p>Data da Contagem: <span id="dataContagem"></span></p>
+            <p>Responsável: ___________________________</p>
+        </div>
+    </div>
+    <script type="module" src="{% static "/js/estoque.js" %}"></script>
+{% endblock content %}

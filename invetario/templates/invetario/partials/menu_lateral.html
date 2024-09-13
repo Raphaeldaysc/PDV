@@ -1,0 +1,19 @@
+{% load static %}
+<div class="sidebar">
+      <h2><a href="{% url "index" %}">São José</a></h2>
+      <div class="user-info">
+        <img src="{{user.img.url}}" alt="Avatar do usuário" class="user-avatar">
+        <span class="user-name">{{user.first_name}} {{user.last_name}}</span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="{% url "index" %}"><i class="fas fa-home"></i> Painel de Controle</a></li>
+          <li><a href="{% url "cadastro-produto" %}"><i class="fas fa-box"></i> Cadastro de Produtos</a></li>
+          <li><a href="{% url "vendas" %}"><i class="fas fa-chart-line"></i> Vendas</a></li>
+          <li><a href="{% url "realizar_venda" %}"><i class="fas fa-cash-register"></i> Realizar Vendas</a></li>
+          <li><a href="{% url "entrada_saida" %}"><i class="fas fa-exchange-alt"></i> Entrada e Saída</a></li>
+          <li><a href="{% url "controle-estoque" %}"><i class="fas fa-warehouse"></i> Controle de Estoque</a></li>
+          <li><a href="{% url "estoque" %}"><i class="fas fa-clipboard-list"></i> Estoque</a></li>
+        </ul>
+      </nav>
+    </div>

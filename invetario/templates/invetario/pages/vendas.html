@@ -1,0 +1,96 @@
+{% extends "global/base.html" %}
+{% load static %}
+ {% block area_title %}Relatório de Vendas{% endblock area_title %}
+    {% block estilo_unico %}{% static "styles/vendas.css" %}{% endblock estilo_unico %}
+    
+ 
+{% block content %}
+    <main class="main-content">
+      <header>
+        <h1>Relatório de Vendas</h1>
+        <div class="user-actions">
+          <button class="btn-icon" title="Notificações"><i class="fas fa-bell"></i></button>
+          <button class="btn-icon" title="Configurações"><i class="fas fa-cog"></i></button>
+          <button class="btn-icon" title="Sair"><i class="fas fa-sign-out-alt"></i></button>
+        </div>
+      </header>
+
+      <section class="sales-summary">
+        <div class="summary-card">
+          <h3>Total de Vendas</h3>
+          <p class="summary-value" id="totalSales">R$ 0,00</p>
+          <p class="summary-period">Últimos 30 dias</p>
+          <a href="#" class="btn-link">Ver detalhes <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="summary-card">
+          <h3>Número de Vendas</h3>
+          <p class="summary-value" id="salesCount">0</p>
+          <p class="summary-period">Últimos 30 dias</p>
+          <a href="#" class="btn-link">Ver detalhes <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="summary-card">
+          <h3>Ticket Médio</h3>
+          <p class="summary-value" id="averageTicket">R$ 0,00</p>
+          <p class="summary-period">Últimos 30 dias</p>
+          <a href="#" class="btn-link">Ver detalhes <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </section>
+
+      <section class="sales-chart">
+        <h2>Gráfico de Vendas</h2>
+        <div class="chart-controls">
+          <div class="input-group">
+            <i class="fas fa-calendar"></i>
+            <select id="chartPeriod">
+              <option value="7">Últimos 7 dias</option>
+              <option value="30" selected>Últimos 30 dias</option>
+              <option value="90">Últimos 90 dias</option>
+            </select>
+          </div>
+        </div>
+        <div class="chart-container">
+          <canvas id="salesChart"></canvas>
+        </div>
+      </section>
+
+      <section class="top-products">
+        <h2>Produtos Mais Vendidos</h2>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Produto</th>
+                <th>Quantidade Vendida</th>
+                <th>Valor Total</th>
+              </tr>
+            </thead>
+            <tbody id="topProductsTable">
+              <!-- Dados serão inseridos via JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="recent-sales">
+        <h2>Vendas Recentes</h2>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Valor</th>
+              </tr>
+            </thead>
+            <tbody id="recentSalesTable">
+              <!-- Dados serão inseridos via JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+
+    <script type="module" src="{% static "js/vendas.js" %}"></script>
+{% endblock content %}
