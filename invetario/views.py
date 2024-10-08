@@ -1,21 +1,34 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
+from sistema_login.models import Usuario as User
 
 
 @login_required(login_url='http://127.0.0.1:8000/auth/login/')
 def index(request):
-    return render(request, "invetario/pages/index.html")
+    usuario = User.objects.get(username=request.user)
+    context = {
+        'usuario': usuario
+    }
+    return render(request, "invetario/pages/index.html", context)
 
 
 @login_required(login_url='http://127.0.0.1:8000/auth/login/')
 def vendas(request):
-    return render(request, "invetario/pages/vendas.html")
+    usuario = User.objects.get(username=request.user)
+    context = {
+        'usuario': usuario
+    }
+    return render(request, "invetario/pages/vendas.html", context)
 
 
 @login_required(login_url='http://127.0.0.1:8000/auth/login/')
 def realizar_venda(request):
-    return render(request, 'invetario/pages/realizar-vendas.html')
+    usuario = User.objects.get(username=request.user)
+    context = {
+        'usuario': usuario
+    }
+    return render(request, 'invetario/pages/realizar-vendas.html', context)
 
 
 @login_required(login_url='http://127.0.0.1:8000/auth/login/')
@@ -26,19 +39,38 @@ def logout(request):
 
 @login_required(login_url='http://127.0.0.1:8000/auth/login/')
 def entrada_saida(request):
-    return render(request, 'invetario/pages/entrada-saida.html')
+    try:
+        usuario = User.objects.get(username=request.user)
+    except:
+        usuario = None
+    context = {
+        'usuario': usuario
+    }
+    return render(request, 'invetario/pages/entrada-saida.html', context)
 
 
 @login_required(login_url='http://127.0.0.1:8000/auth/login/')
 def cadastro_produto(request):
-    return render(request, 'invetario/pages/cadastro-produtos.html')
+    usuario = User.objects.get(username=request.user)
+    context = {
+        'usuario': usuario
+    }
+    return render(request, 'invetario/pages/cadastro-produtos.html', context)
 
 
 @login_required(login_url='http://127.0.0.1:8000/auth/login/')
 def controle_estoque(request):
-    return render(request, 'invetario/pages/controle-estoque.html')
+    usuario = User.objects.get(username=request.user)
+    context = {
+        'usuario': usuario
+    }
+    return render(request, 'invetario/pages/controle-estoque.html', context)
 
 
 @login_required(login_url='http://127.0.0.1:8000/auth/login/')
 def estoque(request):
-    return render(request, 'invetario/pages/estoque.html')
+    usuario = User.objects.get(username=request.user)
+    context = {
+        'usuario': usuario
+    }
+    return render(request, 'invetario/pages/estoque.html', context)

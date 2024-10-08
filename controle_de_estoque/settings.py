@@ -105,6 +105,12 @@ LANGUAGE_CODE = 'pt-BR'
 
 TIME_ZONE = 'America/Fortaleza'
 
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = True
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/

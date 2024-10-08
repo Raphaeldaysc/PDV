@@ -46,5 +46,3 @@ class PagamentoAdmin(admin.ModelAdmin):
 @admin.register(Cliente)
 class ClienteAdmin(admin.ModelAdmin):
     list_display = ['nome', 'email', 'telefone', 'endereco']
-
-# Register your models here.
